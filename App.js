@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { TabNavigator } from 'react-navigation' // Version can be specified in package.json
+import { TabNavigator } from 'react-navigation'
 
 import MeditationsIndex from './src/components/Meditation/Index'
 import HomeIndex from './src/components/Home/Index'

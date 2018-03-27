@@ -22,6 +22,7 @@ class Meditations extends Component {
   loadData = () => {
     axios.get(baseURL).then(response => this.setState({ meditations: response.data.meditations }))
   }
+
   rendermeditations = meditations => {
     return this.state.meditations.map(meditations => (
       <Card key={meditations.id}>

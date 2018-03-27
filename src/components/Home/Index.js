@@ -1,7 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import Header from '../Basic/Header'
-import { Button } from 'react-native-elements'
+import Button from '../Basic/Button'
+import CheckForm from './CheckForm'
+
+import { ButtonGroup } from 'react-native-elements'
 
 export default class MeditationsIndex extends React.Component {
   render() {
@@ -11,9 +14,11 @@ export default class MeditationsIndex extends React.Component {
         <Text style={styles.headerTextStyle}>
           Good afternoon! What kind of meditation do you need today?
         </Text>
-        <View style={styles.container}>
-          <Button raised icon={{ name: 'cached' }} title="Find your perfect meditation" />
-          <Button raised icon={{ name: 'cached' }} title="New User?" />
+        <View>
+          <View>
+            <Image style={styles.imageStyle} source={require('../../../assets/med.png')} />
+          </View>
+          <CheckForm />
         </View>
       </View>
     )
@@ -27,8 +32,16 @@ const styles = StyleSheet.create({
   },
   container: {
     justifyContent: 'space-around'
+  },
+  imageStyle: {
+    width: 375,
+    height: 300,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
+
+// <Button raised icon={{ name: 'cached' }} title="New User?" />
 // <Button raised icon={{ name: 'cached' }} title="Short (under 10 minutes)" />
 // <Button raised icon={{ name: 'cached' }} title="Medium (10 to 15 minutes)" />
 // <Button raised icon={{ name: 'cached' }} title="Medium (15 ot 30 minutes)" />
