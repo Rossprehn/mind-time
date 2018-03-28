@@ -33,7 +33,11 @@ class CheckForm extends Component {
     axios.get(baseURL).then(response => this.setState({ meditations: response.data.meditations }))
   }
   chooseMeditations = e => {
+    // Promise.resolve(this.state)
+    // .then(state => //call get uri function, making sure it returns object with uri)
+    // .then(object => //set state of modal to visible)
     var current = this.state.chosenMeditations
+    //find meditation uri as function returns uri
     this.state.meditations.forEach(meditation => {
       if (meditation.type === this.state.type.toLowerCase()) {
         if (meditation.length === this.state.length.toLowerCase()) {
@@ -42,8 +46,8 @@ class CheckForm extends Component {
       }
     })
     this.setState({ chosenMeditations: current })
-    console.log(this.state.chosenMeditations)
-    this._toggleModal
+    console.log('Object updated to: ', this.state.chosenMeditations)
+    this.setState({ isModalVisible: !this.state.isModalVisible })
   }
 
   render() {
@@ -78,16 +82,19 @@ class CheckForm extends Component {
           containerStyle={{ height: 30 }}
         />
         <Button title="Find Meditation" onPress={this.chooseMeditations.bind(this)} />
-        <Modal isVisible={this.state.isModalVisible}>
-          <View style={{ flex: 1 }}>
+        {this.state.chosenMeditations.length > 0 && (
+          <Modal isVisible={this.state.isModalVisible}>
+            {/*}<View style={{ flex: 1 }}>
             <TouchableOpacity onPress={this._toggleModal}>
               <Text>Hide me!</Text>
             </TouchableOpacity>
-          </View>
-          <View style={styles.container}>
-            <WebView source={{ uri: 'https://www.youtube.com/watch?v=LrpZjbe42mQ' }} />
-          </View>
-        </Modal>
+          </View>*/}
+            <View style={styles.container}>
+              <Text>Hello World</Text>
+              <WebView source={{ uri: this.state.chosenMeditations[0].uri }} />
+            </View>
+          </Modal>
+        )}
       </View>
     )
   }
