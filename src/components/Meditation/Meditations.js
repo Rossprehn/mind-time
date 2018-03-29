@@ -30,6 +30,7 @@ class Meditations extends Component {
           <View style={styles.headerContentStyle}>
             <Text style={styles.headerTextStyle}>Type:{meditations.type}</Text>
             <Text style={styles.headerTextStyle}>length: {meditations.length}</Text>
+            <Text style={styles.headerTextStyle}>Voice: {meditations.voice}</Text>
           </View>
         </CardSection>
         <View>

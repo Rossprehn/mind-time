@@ -39,8 +39,8 @@ class CheckForm extends Component {
     var current = this.state.chosenMeditations
     //find meditation uri as function returns uri
     this.state.meditations.forEach(meditation => {
-      if (meditation.type === this.state.type.toLowerCase()) {
-        if (meditation.length === this.state.length.toLowerCase()) {
+      if (meditation.type === this.state.type) {
+        if (meditation.length === this.state.length) {
           current.push(meditation)
         }
       }
@@ -52,45 +52,57 @@ class CheckForm extends Component {
 
   render() {
     console.log(this.state)
-    const typeButtons = ['Morning', 'Modivation', 'Sleep']
+    const typeButtons = ['Morning', 'Motivation', 'Sleep']
     const lengthButtons = ['Short', 'Medium', 'Long']
-    const voiceButtons = ['Vocal', 'Music']
+    const voiceButtons = ['Voice', 'Music']
     return (
       <View style={styles.container}>
         <ButtonGroup
           onPress={itemIndex =>
             this.setState({ type: typeButtons[itemIndex], typeIndex: itemIndex })
           }
+          selectedButtonStyle={styles.selectedButtonStyle}
           selectedIndex={this.state.typeIndex}
+          selectedTextStyle={{ color: 'white' }}
           buttons={typeButtons}
+          textStyle={{ fontWeight: 'bold' }}
           containerStyle={{ height: 30 }}
         />
         <ButtonGroup
           onPress={itemIndex =>
             this.setState({ length: lengthButtons[itemIndex], lengthIndex: itemIndex })
           }
+          selectedButtonStyle={styles.selectedButtonStyle}
           selectedIndex={this.state.lengthIndex}
+          selectedTextStyle={{ color: 'white' }}
           buttons={lengthButtons}
+          textStyle={{ fontWeight: 'bold' }}
           containerStyle={{ height: 30 }}
         />
         <ButtonGroup
           onPress={itemIndex =>
             this.setState({ voice: voiceButtons[itemIndex], voiceIndex: itemIndex })
           }
+          selectedButtonStyle={styles.selectedButtonStyle}
           selectedIndex={this.state.voiceIndex}
+          selectedTextStyle={{ color: 'white' }}
           buttons={voiceButtons}
           containerStyle={{ height: 30 }}
         />
-        <Button title="Find Meditation" onPress={this.chooseMeditations.bind(this)} />
+        <Button
+          title="Find Meditation"
+          onPress={this.chooseMeditations.bind(this)}
+          textStyle={{ fontWeight: 'bold' }}
+          backgroundColor={'#DB97C2'}
+        />
         {this.state.chosenMeditations.length > 0 && (
           <Modal isVisible={this.state.isModalVisible}>
-            {/*}<View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={this._toggleModal}>
-              <Text>Hide me!</Text>
-            </TouchableOpacity>
-          </View>*/}
+            <View>
+              <TouchableOpacity onPress={this._toggleModal}>
+                <Text>Hide me!</Text>
+              </TouchableOpacity>
+            </View>
             <View style={styles.container}>
-              <Text>Hello World</Text>
               <WebView source={{ uri: this.state.chosenMeditations[0].uri }} />
             </View>
           </Modal>
@@ -104,7 +116,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ecf0f1',
-    height: 500
+    height: 300
+  },
+  selectedButtonStyle: {
+    backgroundColor: '#5DC5AD'
   }
 })
 

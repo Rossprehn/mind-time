@@ -31,19 +31,8 @@ class ChatScreen extends React.Component {
   }
 }
 
-class SettingsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
-      </View>
-    )
-  }
-}
-
 export default TabNavigator({
   Home: { screen: HomeScreen },
   Meditations: { screen: MeditationsScreen },
-  Chat: { screen: ChatScreen },
-  Settings: { screen: SettingsScreen }
+  Chat: { screen: ChatScreen }
 })
