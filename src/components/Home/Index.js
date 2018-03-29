@@ -10,7 +10,7 @@ export default class MeditationsIndex extends React.Component {
   render() {
     return (
       <View>
-        <Header headerText={'Welcome to Mind Time'} />
+        <Header headerText={'Welcome to Mind Time!'} />
         <Text style={styles.headerTextStyle}>
           Good afternoon! What kind of meditation do you need today?
         </Text>

@@ -9,6 +9,7 @@ import {
   onChangeText,
   StyleSheet
 } from 'react-native'
+import io from 'socket.io-client'
 import { Button } from 'react-native-elements' // 0.17.0
 
 class Chat extends React.Component {
@@ -21,26 +22,26 @@ class Chat extends React.Component {
       messages: []
     }
 
-    this.socket = io('localhost:8080')
+    this.socket = io.connect('localhost:8080')
 
     this.socket.on('RECEIVE_MESSAGE', function(data) {
+      console.log('reseving message on client')
       addMessage(data)
     })
-
-    const addMessage = data => {
-      console.log(data)
-      this.setState({ messages: [...this.state.messages, data] })
-      console.log(this.state.messages)
-    }
-
-    this.sendMessage = ev => {
-      ev.preventDefault()
-      this.socket.emit('SEND_MESSAGE', {
-        author: this.state.username,
-        message: this.state.message
-      })
-      this.setState({ message: '' })
-    }
+  }
+  addMessage = data => {
+    console.log('addMessage', data)
+    this.setState({ messages: [...this.state.messages, data] })
+    console.log(this.state.messages)
+  }
+  sendMessage = ev => {
+    console.log('message ', this.state)
+    console.log('user', this.state.username)
+    this.addMessage({
+      author: this.state.username,
+      message: this.state.message
+    })
+    // this.setState({ message: '' })
   }
 
   render() {
@@ -65,15 +66,15 @@ class Chat extends React.Component {
                     type="text"
                     placeholder="Username"
                     value={this.state.username}
-                    onChangeText={ev => this.setState({ username: ev.target.value })}
+                    onChangeText={username => this.setState({ username })}
                   />
                   <TextInput
                     type="text"
                     placeholder="Message"
                     value={this.state.message}
-                    onChangeText={ev => this.setState({ message: ev.target.value })}
+                    onChangeText={message => this.setState({ message })}
                   />
-                  <Button title="Find Meditation" />
+                  <Button title="Send" color="blue" onPress={this.sendMessage.bind(this)} />
                 </View>
               </View>
             </View>

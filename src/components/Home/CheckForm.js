@@ -41,7 +41,9 @@ class CheckForm extends Component {
     this.state.meditations.forEach(meditation => {
       if (meditation.type === this.state.type) {
         if (meditation.length === this.state.length) {
-          current.push(meditation)
+          if (meditation.voice === this.state.voice) {
+            current.push(meditation)
+          }
         }
       }
     })
@@ -54,7 +56,7 @@ class CheckForm extends Component {
     console.log(this.state)
     const typeButtons = ['Morning', 'Motivation', 'Sleep']
     const lengthButtons = ['Short', 'Medium', 'Long']
-    const voiceButtons = ['Voice', 'Music']
+    const voiceButtons = ['Spoken', 'Music']
     return (
       <View style={styles.container}>
         <ButtonGroup
@@ -98,8 +100,8 @@ class CheckForm extends Component {
         {this.state.chosenMeditations.length > 0 && (
           <Modal isVisible={this.state.isModalVisible}>
             <View>
-              <TouchableOpacity onPress={this._toggleModal}>
-                <Text>Hide me!</Text>
+              <TouchableOpacity onPress={this._toggleModal} style={styles.buttonStyle}>
+                <Text style={styles.textStyle}>Hide me!</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.container}>
@@ -120,6 +122,22 @@ const styles = StyleSheet.create({
   },
   selectedButtonStyle: {
     backgroundColor: '#5DC5AD'
+  },
+  textStyle: {
+    alignSelf: 'center',
+    color: '#007aff',
+    fontSize: 16,
+    fontWeight: '600',
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  buttonStyle: {
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#007aff',
+    marginLeft: 5,
+    marginRight: 5
   }
 })
 

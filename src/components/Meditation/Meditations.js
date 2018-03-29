@@ -29,7 +29,7 @@ class Meditations extends Component {
         <CardSection>
           <View style={styles.headerContentStyle}>
             <Text style={styles.headerTextStyle}>Type:{meditations.type}</Text>
-            <Text style={styles.headerTextStyle}>length: {meditations.length}</Text>
+            <Text style={styles.headerTextStyle}>Length: {meditations.length}</Text>
             <Text style={styles.headerTextStyle}>Voice: {meditations.voice}</Text>
           </View>
         </CardSection>
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   headerContentStyle: {
-    flexDirection: 'column',
     justifyContent: 'space-around'
+    // flexDirection: 'row'
   },
   headerTextStyle: {
     fontSize: 18
