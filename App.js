@@ -2,8 +2,9 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { TabNavigator } from 'react-navigation'
 
-import MeditationsIndex from './src/components/Meditation/Index'
 import HomeIndex from './src/components/Home/Index'
+import MeditationsIndex from './src/components/Meditation/Index'
+import ChatIndex from './src/components/Chat/Index'
 
 class HomeScreen extends React.Component {
   render() {
@@ -23,11 +24,7 @@ class MeditationsScreen extends React.Component {
 
 class ChatScreen extends React.Component {
   render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Chat!</Text>
-      </View>
-    )
+    return <ChatIndex />
   }
 }
 

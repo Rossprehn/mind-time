@@ -9,6 +9,7 @@ import {
   onChangeText,
   StyleSheet
 } from 'react-native'
+import { Button } from 'react-native-elements' // 0.17.0
 
 class Chat extends React.Component {
   constructor(props) {
@@ -19,16 +20,38 @@ class Chat extends React.Component {
       message: '',
       messages: []
     }
+
+    this.socket = io('localhost:8080')
+
+    this.socket.on('RECEIVE_MESSAGE', function(data) {
+      addMessage(data)
+    })
+
+    const addMessage = data => {
+      console.log(data)
+      this.setState({ messages: [...this.state.messages, data] })
+      console.log(this.state.messages)
+    }
+
+    this.sendMessage = ev => {
+      ev.preventDefault()
+      this.socket.emit('SEND_MESSAGE', {
+        author: this.state.username,
+        message: this.state.message
+      })
+      this.setState({ message: '' })
+    }
   }
+
   render() {
     return (
-      <View className="container">
-        <View className="row">
-          <View className="col-4">
-            <View className="card">
-              <View className="card-body">
-                <View className="card-title">Global Chat</View>
-                <View className="messages">
+      <View>
+        <View>
+          <View>
+            <View>
+              <View>
+                <Text>Global Chat</Text>
+                <View>
                   {this.state.messages.map(message => {
                     return (
                       <Text>
@@ -37,22 +60,20 @@ class Chat extends React.Component {
                     )
                   })}
                 </View>
-                <View className="footer">
+                <View>
                   <TextInput
                     type="text"
                     placeholder="Username"
                     value={this.state.username}
                     onChangeText={ev => this.setState({ username: ev.target.value })}
-                    className="form-control"
                   />
                   <TextInput
                     type="text"
                     placeholder="Message"
-                    className="form-control"
                     value={this.state.message}
                     onChangeText={ev => this.setState({ message: ev.target.value })}
                   />
-                  <button className="btn btn-primary form-control">Send</button>
+                  <Button title="Find Meditation" />
                 </View>
               </View>
             </View>
