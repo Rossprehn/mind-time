@@ -35,3 +35,5 @@ here the user can chat with the other users of the application
 ### Technologies
 
 React Native, Socket.IO, Expo , Express, Knex, Postgresql, Node 
+
+[backend](https://github.com/Rossprehn/meditations)
